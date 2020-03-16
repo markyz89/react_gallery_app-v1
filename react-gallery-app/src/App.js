@@ -53,7 +53,7 @@ class App extends React.PureComponent {
   // this method is triggered by search and photo container components to trigger a new API call
   handleImageUpdate(query) {
     
-  if(query != this.state.searchText) {
+  if(query !== this.state.searchText) {
      // sets a new query in the state which will trigger another call to the api
       this.setState((state) => ({
         searchText: query

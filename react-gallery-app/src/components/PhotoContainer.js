@@ -3,10 +3,10 @@ import Photo from './Photo';
 
 
 class PhotoContainer extends React.PureComponent {
-    constructor(props) {
-      super(props);
+    // constructor(props) {
+    //   super(props);
       
-    }
+    // }
 
     componentDidMount() {
       let query = this.props.match.params.query
@@ -15,7 +15,7 @@ class PhotoContainer extends React.PureComponent {
 
     //calling update images based on the query parameter
     componentDidUpdate(prevProps) {
-      if(this.props.match.params.query != prevProps.match.params.query) {
+      if(this.props.match.params.query !== prevProps.match.params.query) {
         let query = this.props.match.params.query
         this.props.updateImages(query);
       }
