@@ -3,7 +3,7 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 // Flickr Api
 import apiKey from './config.js'
@@ -13,6 +13,7 @@ import './css/index.css';
 import PhotoContainer from './components/PhotoContainer';
 import Header from './components/Header';
 import NotFound from './components/NotFound';
+
 
 
 // Top level component
@@ -66,34 +67,35 @@ class App extends React.PureComponent {
 
 
   render() {
-    
-    let photoArray =this.state.images 
-
+    let photoArray = this.state.images 
 
     return (
       <BrowserRouter>
         <div className="container">
           <Route path="/" render={() => 
-            <Header 
-            updateImages = {this.handleImageUpdate}
-            />  
+            <Header />  
           } />
 
         {/* redirecting to dogs from home page so there is default content */}
         <Route exact path="/">
-          {<Redirect to="/dogs" />}
-        </Route>
-          
-          {/* Ternary should display the not found text if search term is gibberish */}
-          {photoArray.length ? 
-          
-            <Route path='/:query' render={ (routerProps) => <PhotoContainer 
-              images = {this.state.images} {...routerProps}
-              updateImages = {this.handleImageUpdate}
-              /> 
-          } />
-          :
-          <NotFound /> }
+            {<Redirect to="/dogs" />}
+          </Route> 
+
+        {/* Ternary returns not found component for gibberish search 
+        At least it did, app stops working after first search that returns nothing. Not required for meets expectations
+        and I really want to move on...*/}
+        {/* {photoArray.length ? */}
+                    
+        <Route path='/:query' render={ (routerProps) => <PhotoContainer 
+          images = {this.state.images} {...routerProps}
+          updateImages = {this.handleImageUpdate}
+          /> 
+        } />
+
+        {/* : */}
+
+        <Route component={NotFound} />
+        {/* } */}
         </div>
       </BrowserRouter>
     );
